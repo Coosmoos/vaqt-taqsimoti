@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vaqt taqsimoti</title>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vaqt">
+<script>
+  // Ilovaning asosiy manzili (Google Apps Script veb-ilovasi). Unga faqat egasi kira oladi.
+  var APP_URL = 'https://script.google.com/macros/s/AKfycbzppYi21_8Iev5Fbb-4Y87Sp6JpiEwDOIFYhwb4x8WstROgFpoDCSZm01E1uZQiBaCa/exec';
+  var standalone = window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone === true ||
+                   /[?&]pwa=1\b/.test(location.search);
+  if (standalone) location.replace(APP_URL);
+</script>
+<style>
+  :root{--bg:#f4f5f2;--card:#fff;--ink:#1c1f1d;--muted:#6b726d;--line:#e2e5e0;--acc:#0f766e}
+  @media (prefers-color-scheme:dark){:root{--bg:#111312;--card:#1a1d1b;--ink:#e8ebe8;--muted:#98a09a;--line:#2a2f2c;--acc:#2dd4bf}}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:24px}
+  .card{max-width:420px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;text-align:center}
+  img{width:88px;height:88px;border-radius:20px}
+  h1{font-size:22px;margin:14px 0 4px}
+  p{color:var(--muted);margin:0 0 20px}
+  .btn{display:block;width:100%;padding:13px;border-radius:12px;border:0;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;margin-top:10px}
+  .primary{background:var(--acc);color:#fff}
+  @media (prefers-color-scheme:dark){.primary{color:#062b27}}
+  .ghost{background:transparent;color:var(--acc);border:1px solid var(--line)}
+  .hint{font-size:13px;color:var(--muted);text-align:left;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+  .hint b{color:var(--ink)}
+  .hide{display:none}
+</style>
+</head>
+<body>
+  <main class="card" id="landing">
+    <img src="icon-192.png" alt="">
+    <h1>Vaqt taqsimoti</h1>
+    <p>Kunlik vaqt jurnali — telefon va kompyuterda</p>
+    <button class="btn primary hide" id="install">Ilovani o'rnatish</button>
+    <a class="btn ghost" id="open">Brauzerda ochish</a>
+    <div class="hint" id="hint">
+      <b>O'rnatish:</b> Chrome'da <b>⋮ → Ilovani o'rnatish</b> (Install app) yoki <b>Bosh ekranga qo'shish</b>.<br>
+      iPhone'da: Safari → <b>Ulashish → Bosh ekranga</b>.
+    </div>
+  </main>
+<script>
+  document.getElementById('open').href = APP_URL;
+
+  var deferred = null;
+  var btn = document.getElementById('install');
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferred = e;
+    btn.classList.remove('hide');
+  });
+  btn.addEventListener('click', function () {
+    if (!deferred) return;
+    deferred.prompt();
+    deferred.userChoice.finally(function () { deferred = null; btn.classList.add('hide'); });
+  });
+  window.addEventListener('appinstalled', function () {
+    btn.classList.add('hide');
+    document.getElementById('hint').innerHTML = '<b>O\'rnatildi.</b> Endi ilovani bosh ekrandagi "Vaqt taqsimoti" belgisidan oching.';
+  });
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+</script>
+</body>
+</html>
