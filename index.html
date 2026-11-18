@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vaqt taqsimoti</title>
+<title>Mezon</title>
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vaqt">
+<meta name="apple-mobile-web-app-title" content="Mezon">
 <script>
   // Ilovaning asosiy manzili (Google Apps Script veb-ilovasi). Unga faqat egasi kira oladi.
   var APP_URL = 'https://script.google.com/macros/s/AKfycbzppYi21_8Iev5Fbb-4Y87Sp6JpiEwDOIFYhwb4x8WstROgFpoDCSZm01E1uZQiBaCa/exec';
@@ -39,8 +39,8 @@
 <body>
   <main class="card" id="landing">
     <img src="icon-192.png" alt="">
-    <h1>Vaqt taqsimoti</h1>
-    <p>Kunlik vaqt jurnali — telefon va kompyuterda</p>
+    <h1>Mezon</h1>
+    <p>Vaqt · Kundalik · Moliya · Odatlar — telefon va kompyuterda</p>
     <button class="btn primary hide" id="install">Ilovani o'rnatish</button>
     <a class="btn ghost" id="open">Brauzerda ochish</a>
     <div class="hint" id="hint">
@@ -65,7 +65,7 @@
   });
   window.addEventListener('appinstalled', function () {
     btn.classList.add('hide');
-    document.getElementById('hint').innerHTML = '<b>O\'rnatildi.</b> Endi ilovani bosh ekrandagi "Vaqt taqsimoti" belgisidan oching.';
+    document.getElementById('hint').innerHTML = '<b>O\'rnatildi.</b> Endi ilovani bosh ekrandagi "Mezon" belgisidan oching.';
   });
 
   if ('serviceWorker' in navigator) {

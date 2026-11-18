@@ -1,7 +1,7 @@
 // Ilova qobig'ini keshda saqlaydi, shunda belgidan tez ochiladi.
 // Jadval ma'lumotlari bu yerda saqlanmaydi.
-const CACHE = 'vaqt-qobiq-v1';
-const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'vaqt-qobiq-v2';
+const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
